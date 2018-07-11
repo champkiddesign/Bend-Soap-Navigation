@@ -427,29 +427,6 @@ header img#logo {
     margin: 0px;
   }
 
- .cd-dropdown-content a:hover, .cd-dropdown-content ul a:hover {
-  color: red;
- }
-
- .class:after {
-  content: '';
-  height: 6px;
-  background: #000;
-  display: block;
-   transition: width 0.3s ease-in-out;
-  -webkit-transition: width 0.3s ease-in-out; 
-  -moz-transition: width 0.3s ease-in-out; 
-  -mo-transition: width 0.3s ease-in-out; 
-  -o-transition: width 0.3s ease-in-out; 
-  margin: 0 auto;
-  border-radius: 4px;
-  width: 0;
-}
-
-.class:hover:after {
-  width: 100%;
-}
-
   .cd-dropdown-content .cd-divider, .cd-dropdown-content ul .cd-divider {
     background-color: transparent;
     color: #000;
@@ -728,12 +705,12 @@ ul.cd-dropdown-content li:last-of-type ul.cd-secondary-dropdown .arrow_box--nav2
 
   .no-touch .cd-dropdown-content .cd-secondary-dropdown a:hover {
     color: #5194A6;
-    margin-left: 4px;
-    transition: .15s;
-    -webkit-transition: .15s;
-    -moz-transition: .15s;
-    -mo-transition: .15s;
-    -o-transition: .15s;
+    margin-left: 2px;
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -mo-transition: .2s;
+    -o-transition: .2s;
     cursor: pointer;
   }
   .cd-dropdown-content .cd-secondary-dropdown ul {
@@ -819,10 +796,50 @@ ul.cd-dropdown-content li:last-of-type ul.cd-secondary-dropdown .arrow_box--nav2
     /* if .cd-secondary-dropdown is visible - show also subnavigation */
     visibility: visible;
   }
+
+ .cd-dropdown-content > .has-children > a::before {
+  content: '';
+  height: 6px;
+  background: #000;
+  display: block;
+   transition: width 0.3s ease-in-out;
+  -webkit-transition: width 0.3s ease-in-out; 
+  -moz-transition: width 0.3s ease-in-out; 
+  -mo-transition: width 0.3s ease-in-out; 
+  -o-transition: width 0.3s ease-in-out; 
+  margin: 0 auto;
+  border-radius: 4px;
+  width: 0;
+}
+
   .cd-dropdown-content > .has-children > a.is-active {
-    /* hover effect for .cd-dropdown-content items with subnavigation */
+    /* bookmark hover effect for .cd-dropdown-content items with subnavigation */
     color: #000;
   }
+
+  .active-hover:before {
+  content: '';
+  height: 4px;
+  background: #457581;
+  display: block;
+   transition: width 0.2s ease-in-out;
+  -webkit-transition: width 0.2s ease-in-out; 
+  -moz-transition: width 0.2s ease-in-out; 
+  -mo-transition: width 0.2s ease-in-out; 
+  -o-transition: width 0.2s ease-in-out; 
+  margin: -11px auto 7px auto; /*Top negative margin offsets hover affect margin*/
+  border-radius: 4px;
+  width: 0;
+}
+
+.active-hover:hover:before {
+  width: 40px;
+}
+
+  .cd-dropdown-content > .has-children > a.is-active::before {
+  width: 100%;
+}
+
   .cd-dropdown-content > .has-children > a.is-active::before, .cd-dropdown-content > .has-children > a.is-active::after {
     background: #000;
   }
