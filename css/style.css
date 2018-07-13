@@ -21,29 +21,131 @@ img {
   max-width: 100%;
 }
 
+button.button--no-style {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -mo-box-shadow: none;
+  -o-box-shadow: none;
+}
+
+/* -------------------------------- 
+ * Animated Hamburger Menu Icon
+ * Credit: --> Jonathan Suh // jonsuh.com/hamburgers
+-------------------------------- */
+.hamburger {
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+  transform: scale(.75);
+   }
+
+.hamburger-box {
+  width: 40px;
+  height: 24px;
+  display: inline-block;
+  position: relative; }
+
+.hamburger-inner {
+  display: block;
+  top: 50%;
+  margin-top: -2px; }
+
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 40px;
+    height: 4px;
+    background-color: #000;
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease; }
+
+.hamburger-inner::before, .hamburger-inner::after {
+    content: "";
+    display: block; }
+
+.hamburger-inner::before {
+    top: -10px; }
+
+.hamburger-inner::after {
+    bottom: -10px; }
+
+.hamburger--spin .hamburger-inner {
+  transition-duration: 0.22s;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+
+.hamburger--spin .hamburger-inner::before {
+    transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in; }
+
+.hamburger--spin .hamburger-inner::after {
+    transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19); }
+
+.hamburger--spin.is-active .hamburger-inner {
+  transform: rotate(225deg);
+  transition-delay: 0.12s;
+  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
+  
+.hamburger--spin.is-active .hamburger-inner::before {
+    top: 0;
+    opacity: 0;
+    transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out; }
+
+.hamburger--spin.is-active .hamburger-inner::after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1); }
+
 /* -------------------------------- 
 
 Main Components 
 
 -------------------------------- */
 header {
-  height: 100px;
+  height: 70px;
   width: 100%;
   font-size: 1.6rem;
   font-family: 'Source Sans Pro', sans-serif;
   position: fixed;
+  z-index: 2;
   background-color: #fff;
-   -webkit-box-shadow: 0px 1px 11px 2px rgba(0,0,0,0.14);
-    -moz-box-shadow: 0px 1px 11px 2px rgba(0,0,0,0.14);
-    box-shadow: 0px 1px 11px 2px rgba(0,0,0,0.14);
 }
 
 header img#logo {
-  visibility: hidden;
-  display: none;
+  width: 110px;
+  height: auto;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  z-index: 2;
 }
 
 @media screen and (min-width : 1024px) {
+  header {
+    height: 100px;
+    width: 100%;
+    font-size: 1.6rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    position: fixed;
+    z-index: 2;
+    background-color: #fff;
+     -webkit-box-shadow: 0px 1px 11px 2px rgba(0,0,0,0.14);
+      -moz-box-shadow: 0px 1px 11px 2px rgba(0,0,0,0.14);
+      box-shadow: 0px 1px 11px 2px rgba(0,0,0,0.14);
+
+  }
+
   header img#logo {
     width: 150px;
     height: auto;
@@ -64,10 +166,26 @@ header img#logo {
   }
 }
 
+/*Mobile header block serves to cover mobile dropdown effect without reposition header and elements*/
+.mobile-header-block {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 1;
+  -webkit-box-shadow: 0px 1px 6px 2px rgba(0,0,0,0.14);
+    -moz-box-shadow: 0px 1px 6px 2px rgba(0,0,0,0.14);
+    box-shadow: 0px 1px 6px 2px rgba(0,0,0,0.14);
+}
+
 .cd-dropdown-wrapper {
   /*Position of menu both on desktop and mobile*/
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 22px;
+  right: 0px;
   height: 0px;
   margin: 0px;
   -webkit-font-smoothing: antialiased;
@@ -75,50 +193,13 @@ header img#logo {
 }
 
 .cd-dropdown-trigger {
-  /*color of mobile dropdown*/
-  display: block;
+  /*MENU Icon using FONT AWESOME*/
+  background-color: transparent;
+  color: #000;
   position: relative;
-  padding: 0 36px 0 20px;
-  line-height: 40px;
-  background-color: #FF8663;
-  color: #ffffff;
-}
-.no-touch .cd-dropdown-trigger:hover {
-  /*color of mobile dropdown when hovered on*/
-  background-color: #000;
-}
-.cd-dropdown-trigger::before, .cd-dropdown-trigger::after {
-  /* this is the arrow inside the dropdown trigger*/
-  content: '';
-  position: absolute;
-  top: 50%;
-  margin-top: -1px;
-  height: 2px;
-  width: 9px;
-  background: #ffffff;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transition: width 0.3s, -webkit-transform 0.3s;
-  -moz-transition: width 0.3s, -moz-transform 0.3s;
-  transition: width 0.3s, transform 0.3s;
-}
-.cd-dropdown-trigger::before {
-  /*arrow position inside dropdown trigger*/
-  right: 22px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.cd-dropdown-trigger::after {
-  /*arrow position inside dropdown trigger*/
-  right: 17px;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
+  top: 0px;
+  right: 0px;
+  z-index: 2;
 }
 
 @media screen and (min-width : 1024px) {
@@ -176,13 +257,13 @@ header img#logo {
 .cd-dropdown {
   /*MOBILE: Dropdown global styles*/
   position: fixed;
-  z-index: 1;
+  z-index: 0;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #FF8663;
-  color: #ffffff;
+  background-color: #fff;
+  /*color: #FF8663;*/
   visibility: hidden;
   /* Force Hardware Acceleration */
   -webkit-backface-visibility: hidden;
@@ -206,7 +287,7 @@ header img#logo {
   position: relative;
   z-index: 1;
   color: #585a70;
-  background-color: #111433;
+  background-color: #fff;
   border-bottom: 1px solid #242643;
 }
 .cd-dropdown .cd-close {
@@ -215,8 +296,6 @@ header img#logo {
   z-index: 1;
   right: 0;
   top: 0;
-  height: 50px;
-  width: 50px;
   /* image replacement */
   overflow: hidden;
   text-indent: 100%;
@@ -237,8 +316,8 @@ header img#logo {
   -o-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
   height: 20px;
-  width: 2px;
-  background-color: #ffffff;
+  width: 3px;
+  background-color: #000;
 }
 .cd-dropdown .cd-close::after {
   -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
@@ -275,7 +354,7 @@ header img#logo {
   /*DESKTOP ONLY -Dropdown. Height and width move children lists around*/
   .cd-dropdown {
     height: 100px;
-    width: 80%;
+    width: 78.5%;
     -webkit-transform: translateX(0);
     -moz-transform: translateX(0);
     -ms-transform: translateX(0);
@@ -326,12 +405,12 @@ header img#logo {
   -webkit-transition: -webkit-transform 0.3s;
   -moz-transition: -moz-transform 0.3s;
   transition: transform 0.3s;
-  padding-top: 50px;
+  padding-top: 80px;
 }
 
 .cd-dropdown-content a, .cd-dropdown-content ul a {
   display: block;
-  color: #ffffff;
+  color: #000; /*bookmark * Color of mobile submenu links*/
   /* truncate text with ellipsis if too long */
   overflow: hidden;
   text-overflow: ellipsis;
@@ -397,10 +476,10 @@ header img#logo {
 }
 @media only screen and (min-width: 768px) {
   .cd-dropdown-content, .cd-dropdown-content ul {
-    padding-top: 60px;
+    padding-top: 70px;
   }
   .cd-dropdown-content a, .cd-dropdown-content ul a {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 }
 
@@ -849,7 +928,7 @@ ul.cd-dropdown-content li:last-of-type ul.cd-secondary-dropdown .arrow_box--nav2
 @media screen and (min-width: 1200px) {
   .cd-dropdown {
     /*DESKTOP ONLY  ~ BIG SCREEN*/
-      width: 84%;
+      width: 82%;
   }
 }
 
@@ -986,10 +1065,15 @@ ul.cd-dropdown-content li:last-of-type ul.cd-secondary-dropdown .arrow_box--nav2
   display: inline-block;
   height: 2px;
   width: 10px;
-  background: #ffffff;
+  background: #9B9A9A;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
+.has-children > a::before, .has-children > a:after {
+  background: #5194A6;
+}
+
 .has-children > a::before, .go-back a::before {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
@@ -1045,12 +1129,16 @@ ul.cd-dropdown-content li:last-of-type ul.cd-secondary-dropdown .arrow_box--nav2
     transform-origin: 1px 50%;
   }
 }
+
 .cd-dropdown-content .go-back a {
   padding-left: 40px;
+  text-align: right;
+  background-color: #fff;
+  color: #3e3e3e;
 }
 .cd-dropdown-content .go-back a::before, .cd-dropdown-content .go-back a::after {
   /* arrow goes on the left side - go back button */
-  left: 20px;
+  right: 70px;
   -webkit-transform-origin: 1px 50%;
   -moz-transform-origin: 1px 50%;
   -ms-transform-origin: 1px 50%;
@@ -1080,8 +1168,9 @@ ul.cd-dropdown-content li:last-of-type ul.cd-secondary-dropdown .arrow_box--nav2
 }
 
 /*Account Links*/
+/*NOTE: Mobile styles for account links are found in max width media queries*/
 .account-links {
-    min-width: 220px;
+    min-width: 265px;
     width: 15%;
     height: auto;
     padding: 43px 1% 35px 1%;
@@ -1106,14 +1195,80 @@ ul.cd-dropdown-content li:last-of-type ul.cd-secondary-dropdown .arrow_box--nav2
   cursor: pointer;
 }
 
+.account-links ul > li .fas.fa-shopping-cart {
+  font-size: 26px;
+  margin-top: -5px;
+}
+
 .account-links ul > li:last-of-type {
   margin-right: 0px;
-  margin-top: -3.5px;
+  margin-top: -1px;
+  margin-right: 5%;
+  margin-left: -1px;
 }
 
 .account-links ul > li:last-of-type > img {
     width: 23px;
     height: auto;
+}
+
+.account-links ul > li p {
+  display: inline-block;
+  margin-left: 6px;
+  margin-right: 10px;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+  /*Scales down shopping cart icon for smaller computer screens*/
+    .account-links ul > li .fas.fa-shopping-cart {
+        transform: scale(.65);
+        margin-top: -5px;
+      }
+}
+
+@media screen and (max-width: 1023px) {
+  /*Position of account links when hitting responsive breakpoint*/
+    .account-links {
+      min-width: none;
+      width: auto;
+      height: auto;
+      padding: 0px;
+      overflow: visible;
+      font-size: 15px;
+      background-color: transparent;
+      position: absolute;
+      top: 27px;
+      right: 72px;
+      z-index: 1;
+  }
+
+  .account-links ul {
+    width: 90px;
+    float: right;
+  }
+
+  .account-links ul > li {
+    margin: 0px 17px; /*adjusts cart and user icon on mobile */
+  }
+
+  .account-links ul > li:first-of-type {
+      display: none;
+      visibility: hidden;
+    }
+
+  .account-links ul > li .fas.fa-user {
+    padding-right: 6px;
+    transform: scale(1.1);
+    margin-top: 0px;
+  }
+
+  .account-links ul > li > a > p {
+    display: none;
+    visibility: hidden;
+  }
+
+
 }
 
 

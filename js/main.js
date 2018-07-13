@@ -40,6 +40,13 @@ jQuery(document).ready(function($){
         submenuDirection: submenuDirection,
     });
 
+    //toggle hamburger menu
+    var $hamburger = $(".hamburger");
+			  $hamburger.on("click", function(e) {
+			    $hamburger.toggleClass("is-active");
+			    // Do something else, like open/close menu
+			  });
+
 	//submenu items - go back link
 	$('.go-back').on('click', function(){
 		var selected = $(this),
